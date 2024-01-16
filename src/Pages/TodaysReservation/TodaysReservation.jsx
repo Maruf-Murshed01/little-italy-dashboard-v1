@@ -1,6 +1,7 @@
 import { useState } from 'react';
-
+// import {ResInfo} from '../../Componants/ResInfo'
 import { useQuery } from '@tanstack/react-query';
+import ResInfo from '../../Componants/ResInfo';
 
 const NewReservation = () => {
     const [selected, setSelected] = useState(new Date());
@@ -21,7 +22,6 @@ const NewReservation = () => {
 
 
     return (
-
         <>
             <div className="w-full mt-14 md:mt-0 m-5 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div className=" flex items-center justify-center mb-4 py-8">
@@ -30,8 +30,8 @@ const NewReservation = () => {
                 <div className="flow-root">
                     {
                         todayreserv.length > 0 ? (
-                            todayreserv.map((singcard, i) => (
-                                <div key={i}>
+                            todayreserv.map((singcard) => (
+                                <div key={singcard._id}>
                                     <ResInfo
                                         name={singcard.name}
                                         persons={singcard.person}
@@ -39,11 +39,11 @@ const NewReservation = () => {
                                         time={singcard.slot}
                                         phone={singcard.phone}
                                         email={singcard.email}
-                                    />
+                                    ></ResInfo>
                                 </div>
                             ))
                         ) : (
-                            <p className='text-2xl text-red-800 text-center '>"No reservation yet today"</p>
+                            <p className='text-2xl text-blue-700 text-center '>No reservation yet today</p>
                         )
                     }
                 </div>

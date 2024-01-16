@@ -10,22 +10,24 @@ const EmployeeApplication = () => {
         }
     })
     return (
-        <div className="w-full flex flex-wrap justify-center items-center gap-6 p-10">
-            {
-                application.length > 0 ? (
-                    application.map((singcard, i) => <div key={i}>
+        <>
+            <div className="w-full flex flex-wrap justify-center items-center gap-6 p-10">
+                {
+                    application.length > 0 ? (
+                        application.map((singcard, i) => <div key={i}>
 
-                        {/* <div className="card-actions justify-center">
+                            {/* <div className="card-actions justify-center">
                         <button className='btn btn-sm btn-ghost'>{singcard.condition}</button>
                     </div> */}
 
-                        <ApplicationInfo name={singcard.fullname} role={singcard.applyingrole} email={singcard.email} phone={singcard.phone} street={singcard.streetaddress} adress={singcard.currentaddress} exp={singcard.sendamessage} />
-                    </div>)) : (
-                    <p className='text-2xl text-red-800 text-center '>"No Application "</p>
-                )
-            }
+                            <ApplicationInfo name={singcard.fullname} role={singcard.applyingrole} email={singcard.email} phone={singcard.phone} street={singcard.streetaddress} adress={singcard.currentaddress} exp={singcard.sendamessage} cv={singcard.img} />
+                        </div>)) : (
+                        <p className='text-2xl text-blue-700 text-center '>No Application</p>
+                    )
+                }
 
-        </div>
+            </div>
+        </>
     );
 };
 

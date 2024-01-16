@@ -3,7 +3,7 @@ import { AiOutlinePhone, AiOutlineMail, AiOutlineClockCircle, AiOutlineCalendar,
 function ResInfo({name, persons, date, time, phone, email}) {
   return (
     <>
-          <li className="py-3 sm:py-4">
+          <div className="py-3 sm:py-4">
             <div className="flex flex-col md:flex-row items-center space-x-4 justify-between">
               
               <div className="w-full md:w-1/3">
@@ -39,7 +39,8 @@ function ResInfo({name, persons, date, time, phone, email}) {
                 </div>
               </div>
             </div>
-          </li>
+            <hr />
+          </div>
     </>
   )
 }
