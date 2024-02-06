@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import ResInfo from "../../Componants/ResInfo";
 // import { useContext, useEffect, useState } from "react";
 // import { AuthContext } from "../../contexts/UserContext";
 
 const Reservation = () => {
+  const [sortMethod, setSortMethod] = useState("default");
   // const {log} = useContext(AuthContext)
 
   const { refetch, data: reserv = [] } = useQuery({
@@ -27,13 +29,31 @@ const Reservation = () => {
       });
   };
 
-  // console.log(reserv)
+  const handleSelectInputChange = (e) => {
+    setSortMethod(e.target.value);
+  };
+  const sortFunc = (a, b) => {
+    if (sortMethod === "newest") {
+      return new Date(b.date) - new Date(a.date);
+    } else {
+      return new Date(a.date) - new Date(b.date);
+    }
+  };
   return (
     <div className="w-full mt-14 md:mt-0 m-5 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <div className=" flex items-center justify-center mb-4 py-8">
+      <div className=" flex items-center justify-center py-8">
         <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white ">
           Total Reservations
         </h5>
+      </div>
+      <div className="flex items-center justify-end mb-4">
+        <select
+          onChange={handleSelectInputChange}
+          className="text-gray-900 dark:text-gray-900"
+        >
+          <option value="default">default</option>
+          <option value="newest">newest orders first</option>
+        </select>
       </div>
       <div className="flow-root">
         <ul
@@ -41,7 +61,7 @@ const Reservation = () => {
           className="divide-y divide-gray-200 dark:divide-gray-700"
         >
           {reserv.length > 0 ? (
-            reserv.map((singcard, i) => (
+            reserv.sort(sortFunc).map((singcard, i) => (
               <div key={i}>
                 {/* <div className="card-actions justify-center">
                             <button onClick={() => alreadySeen(singcard._id)} className={singcard.condition === 'seen' ? 'btn btn-sm btn-ghost' : 'btn btn-sm btn-neutral'}>{singcard.condition}</button>
@@ -54,6 +74,7 @@ const Reservation = () => {
                   time={singcard.slot}
                   phone={singcard.phone}
                   email={singcard.email}
+                  orderdate={singcard.orderdate}
                 />
               </div>
             ))
